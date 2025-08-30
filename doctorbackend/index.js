@@ -26,7 +26,7 @@ app.use(cors({
 
 const allowedOrigins = [
   "http://localhost:5173",   // development (vite frontend local)
-  "*"  // deployment (frontend vercel url)
+  "https://sagarclinic.vercel.app"  // deployment (frontend vercel url)
 ];
 // app.use(cors({
 //   origin: "https://clinicsagar.onrender.com", // your frontend URL
