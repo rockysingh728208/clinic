@@ -10,29 +10,29 @@ import userRouter from './routes/userRoute.js';
 dotenv.config();
 const app=express();
 // app.use(cors());
-// app.use(cors({
-//   origin: function (origin, callback) {
-//     // allow requests with no origin (like mobile apps or curl)
-//     if (!origin) return callback(null, true);
-//     if (allowedOrigins.includes(origin)) {
-//       return callback(null, true);
-//     } else {
-//       return callback(new Error("CORS not allowed for this origin"), false);
-//     }
-//   },
-//   credentials: true
-// }));
-
-
-// const allowedOrigins = [
-//   "http://localhost:5173",   // development (vite frontend local)
-//   "https://clinicsagar.onrender.com"  // deployment (frontend vercel url)
-// ];
 app.use(cors({
-  origin: "https://clinicsagar.onrender.com", // your frontend URL
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("CORS not allowed for this origin"), false);
+    }
+  },
   credentials: true
 }));
+
+
+const allowedOrigins = [
+  "http://localhost:5173",   // development (vite frontend local)
+  "*"  // deployment (frontend vercel url)
+];
+// app.use(cors({
+//   origin: "https://clinicsagar.onrender.com", // your frontend URL
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true
+// }));
 
 
 // api end points nmsdjbbjhb 
