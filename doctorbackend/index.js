@@ -28,12 +28,36 @@ const app=express();
 //   "http://localhost:5173",   // development (vite frontend local)
 //   "https://clinicsagar.onrender.com"  // deployment (frontend vercel url)
 // ];
-app.use(cors({
-  origin: "https://clinicsagar.onrender.com", // your frontend URL
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
 
+
+
+// app.use(cors({
+//   origin: "https://clinicsagar.onrender.com", // your frontend URL
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true
+// }));
+
+
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://clinicsagar.onrender.com"
+  // Ye URL front end ka hai jo render par deploy hai
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS: " + origin));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 // api end points nmsdjbbjhb 
 
