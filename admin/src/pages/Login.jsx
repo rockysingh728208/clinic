@@ -113,7 +113,7 @@ const Login = () => {
   const [state, setState] = useState('Admin');
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
-  const {setAtoken,backendUrl}=useContext(AdminContext)
+  const {setAToken,backendUrl}=useContext(AdminContext)
   const navigate = useNavigate();   // ✅ navigation hook
 
   const onSubmitHandler= async(event)=>{
@@ -128,7 +128,7 @@ const Login = () => {
         if(data.success){
           toast.success("Login success");
           localStorage.setItem('atoken',data.token)
-          setAtoken(data.token)
+          setAToken(data.token)
 
           navigate('/doctor-list')   // ✅ redirect to doctor-list
         }else{
