@@ -1,7 +1,4 @@
 
-
-
-
 // import React, { useContext, useState } from 'react';
 // import { assets } from '../../assets/assets';
 // import { AdminContext } from '../../context/AdminContext';
@@ -33,7 +30,7 @@
 //     formData.append('name', name);
 //     formData.append('speciality', speciality);
 //     formData.append('email', email);
-//     formData.append('degree', degree); // ✅ corrected key
+//     formData.append('degree', degree);
 //     formData.append('password', password);
 //     formData.append('address', JSON.stringify({ line1: address1, line2: address2 }));
 //     formData.append('experience', experience);
@@ -55,24 +52,24 @@
 //       if (data.success) {
 //         toast.success(data.message || "Doctor added successfully!");
 
-// setDocImage(false)
-// setName('')
-// setSpeciality('')
-// setEmail('')
-// setDegree('')
-// setPassword('')
-// setAddress1('')
-// setAddress2('')
-// setExperience('')
-// setAbout('')
-// setFees('')
-        
+//         // Clear all fields after successful add
+//         setDocImage(null);
+//         setName('');
+//         setSpeciality('General Physician');
+//         setEmail('');
+//         setDegree('');
+//         setPassword('');
+//         setAddress1('');
+//         setAddress2('');
+//         setExperience('1 Year');
+//         setFees('');
+//         setAbout('');
 //       } else {
 //         toast.error(data.message || "Failed to add doctor.");
 //       }
 //     } catch (err) {
 //       console.error("Submit Error:", err);
-//       toast.error(err.response?.data?.message || "Something went wrong while adding doctor");
+//       toast.error(err.response?.data?.message || "Something went wrong");
 //     }
 //   };
 
@@ -209,7 +206,6 @@ const AddDoctor = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-
     if (!docImage) return toast.error("Please upload the doctor's image");
 
     const formData = new FormData();
@@ -262,17 +258,19 @@ const AddDoctor = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-[#f0f4f8] p-4">
-      <form onSubmit={onSubmitHandler} className="bg-white rounded-lg w-full max-w-5xl p-8">
-        <h2 className="text-3xl font-bold text-blue-700 mb-8">Add Doctor</h2>
+      <form onSubmit={onSubmitHandler} className="bg-white rounded-lg w-full max-w-5xl p-6 md:p-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-blue-700 mb-6 md:mb-8 text-center md:text-left">
+          Add Doctor
+        </h2>
 
-        <div className="grid grid-cols-3 gap-8">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8">
           {/* Upload */}
-          <div className="col-span-1 flex flex-col items-center">
+          <div className="flex flex-col items-center md:items-start md:w-1/3">
             <label htmlFor="doc-img" className="cursor-pointer">
               <img
                 src={docImage ? URL.createObjectURL(docImage) : assets.upload_area}
                 alt="Upload"
-                className="w-32 h-32 object-cover rounded-full border-2"
+                className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-full border-2"
               />
             </label>
             <input
@@ -281,13 +279,13 @@ const AddDoctor = () => {
               hidden
               onChange={(e) => setDocImage(e.target.files[0])}
             />
-            <p className="text-sm text-gray-500 text-center mt-3">
+            <p className="text-sm text-gray-500 text-center mt-3 md:text-left">
               Upload doctor's <br /> profile picture
             </p>
           </div>
 
           {/* Inputs */}
-          <div className="col-span-2 grid grid-cols-2 gap-6">
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             <Input label="Doctor Name" value={name} setValue={setName} placeholder="Dr. John Doe" />
             <Select
               label="Speciality"
@@ -314,7 +312,7 @@ const AddDoctor = () => {
         </div>
 
         {/* About */}
-        <div className="mt-8">
+        <div className="mt-6 md:mt-8">
           <label className="text-sm text-gray-600">About Me</label>
           <textarea
             value={about}
@@ -326,7 +324,7 @@ const AddDoctor = () => {
         </div>
 
         {/* Submit */}
-        <div className="mt-8 text-right">
+        <div className="mt-6 md:mt-8 text-center md:text-right">
           <button
             type="submit"
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition"
@@ -368,5 +366,3 @@ const Select = ({ label, value, setValue, options }) => (
 );
 
 export default AddDoctor;
-
-
